@@ -1,0 +1,7 @@
+name = "IT Services - Search"
+description = "Google Custom Search Module"
+package = "IT Services"
+core = 7.x
+hidden = TRUE
+
+scripts[] = js/google_cse.js
