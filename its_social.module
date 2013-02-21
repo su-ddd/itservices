@@ -1,0 +1,25 @@
+<?php
+
+function its_social_block_info() {
+  $blocks['its_social_footer'] = array(
+    'info' => t('Social Footer'),
+	'status' => TRUE,
+	'region' => 'footer',
+  );
+
+  return $blocks;
+}
+
+function its_social_block_view($delta = '') {
+  switch ($delta) {
+    case 'its_social_footer':
+	  $block['title'] = 'Social';
+	  $block['content'] = array(
+	    '#markup' => '<ul class="menu the-icons"><li><a href="#"><i class="icon-facebook"></i>Facebook</a></li><li><a href="#"><i class="icon-twitter"></i>Twitter</a></li></ul>',
+      );
+	  break;
+  }
+  return $block;
+}
+
+

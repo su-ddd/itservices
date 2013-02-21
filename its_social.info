@@ -1,0 +1,5 @@
+name = "IT Services - Social"
+description = "Social Block"
+package = "IT Services"
+core = 7.x
+hidden = TRUE
