@@ -4,7 +4,7 @@ function its_status_block_block_info() {
   $blocks['its_status_block'] = array(
     'info' => t('Front Page: Status & Metrics'),
 	'status' => TRUE,
-	'region' => 'content-top',
+	'region' => 'content_top',
 	'pages' => '<front>',
 	'visibility' => BLOCK_VISIBILITY_LISTED,
   );
