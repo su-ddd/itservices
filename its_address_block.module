@@ -1,0 +1,25 @@
+<?php
+
+function its_address_block_block_info() {
+  $blocks['its_address_footer'] = array(
+    'info' => t('ITS Address Footer'),
+	'status' => TRUE,
+	'region' => 'footer',
+  );
+
+  return $blocks;
+}
+
+function its_address_block_block_view($delta = '') {
+  switch ($delta) {
+    case 'its_address_footer':
+	  $block['title'] = 'Address';
+	  $block['content'] = array(
+	    '#markup' => '<ul class="menu"><li>IT Services</li><li>243 Panama Street</li><li>Stanford, CA 94305-4102</li><li><a href="https://helpsu.stanford.edu">Contact us</a></li></ul>',
+      );
+	  break;
+  }
+  return $block;
+}
+
+
