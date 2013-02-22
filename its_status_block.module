@@ -1,0 +1,25 @@
+<?php
+
+function its_status_block_block_info() {
+  $blocks['its_status_block'] = array(
+    'info' => t('Front Page: Status & Metrics'),
+	'status' => TRUE,
+	'region' => 'content-top',
+  );
+
+  return $blocks;
+}
+
+function its_status_block_block_view($delta = '') {
+  switch ($delta) {
+    case 'its_status_block':
+	  $block['title'] = 'Status & Metrics';
+	  $block['content'] = array(
+	    '#markup' => '<p><iframe frameborder="0" height="200" marginheight="0" marginwidth="0" scrolling="no" src="http://apps.stanford.edu/status" style="overflow: hidden;" width="100%"></iframe></p><p><a href="https://dashboard.stanford.edu/jira/secure/Dashboard.jspa?selectPageId=10000">IT Services Metrics »</a></p>',
+      );
+	  break;
+  }
+  return $block;
+}
+
+

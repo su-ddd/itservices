@@ -1,0 +1,5 @@
+name = "IT Services - Status and Metrics Block"
+description = "Status and Metrics Block"
+package = "IT Services"
+core = 7.x
+hidden = TRUE
