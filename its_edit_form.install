@@ -1,0 +1,17 @@
+<?php
+function its_edit_form_install() {
+
+  // Make sure we run after the metatag module,
+  // since we are modifying the form it builds
+
+  $weight = db_select('system', 's')
+              ->fields('s', array('weight'))
+              ->condition('name', 'metatag', '=')
+              ->execute()
+              ->fetchField();
+
+  db_update('system')
+    ->fields(array('weight' => $weight +1))
+    ->condition('name', 'its_edit_form', '=')
+    ->execute();
+}

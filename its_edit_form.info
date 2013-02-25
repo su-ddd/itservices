@@ -1,0 +1,5 @@
+name = "IT Services - Edit Form"
+description = "Tweaks to the Edit Form"
+package = "IT Services"
+core = 7.x
+hidden = TRUE

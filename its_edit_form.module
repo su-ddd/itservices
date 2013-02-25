@@ -1,0 +1,11 @@
+<?php
+
+// Hide the unneeded meta tag fields and rename the fieldset
+function its_edit_form_form_service_page_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['metatags']['#title'] = 'Description Meta Tag';
+  unset($form['metatags']['title']);
+  unset($form['metatags']['abstract']);
+  unset($form['metatags']['keywords']);
+  unset($form['metatags']['advanced']);
+  unset($form['metatags']['tokens']);
+}
