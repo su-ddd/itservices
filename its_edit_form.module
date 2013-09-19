@@ -1,7 +1,17 @@
 <?php
-
+function its_edit_form_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'content_access_page') {
+    $form['per_role']['#description'] = "Select all the roles that are allowed to view the content on this page. Some roles (administrator) cannot be de-selected. Others are pre-selected as defaults (e.g. IT Services Employee for Service Agreements)";
+    $form['per_role']['view']['#title'] = "Roles that can view this page:";
+    $form['per_role']['view_own']['#access'] = FALSE;
+    $form['per_role']['update']['#access'] = FALSE;
+    $form['per_role']['update_own']['#access'] = FALSE;
+    $form['per_role']['delete']['#access'] = FALSE;
+    $form['per_role']['delete_own']['#access'] = FALSE;
+  }
+}
 // Hide the unneeded meta tag fields and rename the fieldset
-function its_edit_form_form_service_page_node_form_alter(&$form, &$form_state, $form_id) {
+function its_edit_form_form_node_form_alter(&$form, &$form_state, $form_id) {
   $form['metatags']['#title'] = 'Description Meta Tag';
   unset($form['metatags']['title']);
   unset($form['metatags']['abstract']);
