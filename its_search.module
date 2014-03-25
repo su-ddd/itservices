@@ -1,5 +1,9 @@
 <?php
 
+/**
+ *  Implements hook_menu().
+ */
+
 function its_search_menu() {
   $items = array();
 
@@ -12,10 +16,28 @@ function its_search_menu() {
   return $items;
 }
 
+/**
+ *  Callback for the /search page
+ *
+ *  We use gcse:search instead of gcse:searchresults-only to show a search box alongside
+ *  the search results. The search box will contain the search query.
+ *  Note the addition of queryparametername as q_as. The default, 'q' conflicts with Drupal's.
+ *
+ */
+
 function its_search_search_page() {
   $output = '<gcse:search linktarget="_parent" queryparametername="q_as"></gcse:search>';
   return $output;
 }
+
+/**
+ * Implements hook_block_info().
+ *
+ * Search Box Block
+ * We show this everywhere, except the /search page where the search box is closer to
+ * the search results
+ *
+ */
 
 function its_search_block_info() {
   $blocks['its_search_search'] = array(
@@ -29,6 +51,15 @@ function its_search_block_info() {
   return $blocks;
 }
 
+
+/**
+ * Implements hook_block_view().
+ * 
+ * Display Google's code to display the search box.
+ * Note the addition of queryparametername as q_as. The default, 'q' conflicts with Drupal's.
+ *
+ */
+
 function its_search_block_view($delta = '') {
   switch ($delta) {
     case 'its_search_search':
@@ -40,5 +71,3 @@ function its_search_block_view($delta = '') {
   }
   return $block;
 }
-
-
