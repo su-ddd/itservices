@@ -11,5 +11,5 @@ Enable the module as usual.
 
 ## Customization
 
-Modify the second line of google_cse.js to include the search engine ID from Google.
+Modify the second line of js/google_cse.js to include the search engine ID from Google.
 Visit Structure > Blocks to place the Search Box in the region you want.
