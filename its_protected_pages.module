@@ -21,38 +21,44 @@ function its_protected_pages_report() {
 
 	$viewer_rids = $settings['view'];
 
+    // skip nodes that are viewable by anonymous users
     if (in_array(DRUPAL_ANONYMOUS_RID, $viewer_rids)) {
 	  continue;
     }
 
     $node = node_load($nid);
 
+    // skip unpublished nodes
 	if ($node->status == NODE_NOT_PUBLISHED) {
 	  continue;
 	}
 
+    // skip nodes handling agreements - handled by a different team
 	if ($node->type == 'agreement') {
 	  continue;
     }
 
-	// is there a service?
-	$service = 'None';
+	// is there a service associated with this node?
+	$service_name = 'None';
 
 	if (property_exists($node, 'field_service')) {
       if (isset($node->field_service[LANGUAGE_NONE][0]['target_id'])) {
 	    $service_id = $node->field_service[LANGUAGE_NONE][0]['target_id'];
-	    $service_object = node_load($service_id);
-		$service = $service_object->title;
+	    $service    = node_load($service_id);
+		$service_name = $service->title;
 	  }
     }
 
-    $rows[] = array($node->nid, l($node->title, 'node/' . $nid), $service);
+    $rows[] = array($node->nid, l($node->title, 'node/' . $nid), $service_name);
   }
 
+  // sort the rows by service name
   uasort($rows, 'cmp');
+
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
 
+// sort by the third key (the service name) 
 function cmp($a, $b) {
   if ($a == $b) {
     return 0;
