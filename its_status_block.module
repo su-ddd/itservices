@@ -17,7 +17,7 @@ function its_status_block_block_view($delta = '') {
     case 'its_status_block':
 	  // $block['title'] = 'Status & Metrics';
 	  $block['content'] = array(
-	    '#markup' => '<h2 class="system-status-heading"><a href="https://dashboard.stanford.edu/jira/secure/Dashboard.jspa?selectPageId=10000">System Status <i class="icon-double-angle-right"></i></a></h2><iframe frameborder="0" height="170" marginheight="0" marginwidth="0" scrolling="no" src="https://apps.stanford.edu/status?new" style="overflow: hidden;" width="100%"></iframe>',
+	    '#markup' => '<h2 class="system-status-heading"><a href="https://dashboard.stanford.edu/">System Status <i class="icon-double-angle-right"></i></a></h2><iframe frameborder="0" height="170" marginheight="0" marginwidth="0" scrolling="no" src="https://apps.stanford.edu/status?new" style="overflow: hidden;" width="100%"></iframe>',
       );
 	  break;
   }
