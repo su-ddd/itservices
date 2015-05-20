@@ -1,0 +1,4 @@
+name = "IT Services - Protected Pages"
+description = "Protected Pages Report"
+package = "IT Services"
+core = 7.x

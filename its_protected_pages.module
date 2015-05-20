@@ -1,0 +1,71 @@
+<?php
+
+function its_protected_pages_report() {
+
+  // skip if the content access module is not enabled
+  if (!(module_exists('content_access'))) {
+    drupal_set_message('content access not enabled');
+	return;
+  }
+
+  // find all entries in the content access table
+  $result = db_query("select nid, settings from {content_access}");
+
+  $header = array('Node ID', 'Title', 'Service');
+  $rows   = array();
+
+  foreach ($result as $record) {
+
+    $nid = $record->nid;
+	$settings = unserialize($record->settings);
+
+	$viewer_rids = $settings['view'];
+
+    if (in_array(DRUPAL_ANONYMOUS_RID, $viewer_rids)) {
+	  continue;
+    }
+
+    $node = node_load($nid);
+
+	if ($node->status == NODE_NOT_PUBLISHED) {
+	  continue;
+	}
+
+	if ($node->type == 'agreement') {
+	  continue;
+    }
+
+	// is there a service?
+	$service = 'None';
+
+	if (property_exists($node, 'field_service')) {
+      if (isset($node->field_service[LANGUAGE_NONE][0]['target_id'])) {
+	    $service_id = $node->field_service[LANGUAGE_NONE][0]['target_id'];
+	    $service_object = node_load($service_id);
+		$service = $service_object->title;
+	  }
+    }
+
+    $rows[] = array($node->nid, l($node->title, 'node/' . $nid), $service);
+  }
+
+  uasort($rows, 'cmp');
+  return theme('table', array('header' => $header, 'rows' => $rows));
+}
+
+function cmp($a, $b) {
+  if ($a == $b) {
+    return 0;
+  }
+  return ($a[2] < $b[2]) ? -1 : 1;
+}
+
+function its_protected_pages_menu() {
+  $items['reports/protected_pages'] = array(
+    'title'         => 'Protected Pages Report',
+    'page callback' => 'its_protected_pages_report',
+    'access arguments' => array('bypass node access'),
+//    'access callback' => TRUE,
+  );
+  return $items;
+}
